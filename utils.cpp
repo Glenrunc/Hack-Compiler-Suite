@@ -1,17 +1,36 @@
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <cctype>
-#include <sstream>
+#include "utils.hpp"
 
-using namespace std;
 
-std::vector<std::string> tokenize(const std::string& s) {
-    std::istringstream iss(s);
-    std::vector<std::string> tokens;
-    std::string token;
+unordered_map<string, int> LabelTable = {
+    {"SP", 0x0000},
+    {"LCL", 0x0001},
+    {"ARG", 0x0002},
+    {"THIS", 0x0003},
+    {"THAT", 0x0004},
+    {"R0", 0x0000},
+    {"R1", 0x0001},
+    {"R2", 0x0002},
+    {"R3", 0x0003},
+    {"R4", 0x0004},
+    {"R5", 0x0005},
+    {"R6", 0x0006},
+    {"R7", 0x0007},
+    {"R8", 0x0008},
+    {"R9", 0x0009},
+    {"R10", 0x000A},
+    {"R11", 0x000B},
+    {"R12", 0x000C},
+    {"R13", 0x000D},
+    {"R14", 0x000E},
+    {"R15", 0x000F},
+    {"SCREEN", 0x4000},  
+    {"KBD", 0x6000}     
+};
+
+vector<string> tokenize(const string& s) {
+    istringstream iss(s);
+    vector<string> tokens;
+    string token;
     while (iss >> token) {
         tokens.push_back(token);
     }

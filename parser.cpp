@@ -38,49 +38,47 @@ InstructionType Parser::getCurrentInstruction() const {
   return this->currentInstruction;
 }
 
-InstructionType Parser::findInstruction() {
+void Parser::findInstruction() {
 
   InstructionType instruction = NOT_DEFINE;
 
   string currentLine = this->getCurrentLine();
 
   if (currentLine.empty()) {
-    return NOT_DEFINE;
-  }
-
-  if (current_line.size() >= 2 && current_line[0] == '/' && current_line[1] == '/') {
+    instruction =  NOT_DEFINE;
+  }else if (current_line.size() >= 2 && current_line[0] == '/' && current_line[1] == '/') {
     instruction = COMMENT_LINE;
-  }
-
-  if (current_line[0] == '@') {
+  } else if (current_line[0] == '@') {
     vector<string> tokens = tokenize(current_line);
 
     if (tokens.size() == 1) {
       if (isCorrectlyFormatted(current_line.substr(1))) {
         instruction = A_INSTRUCTION;
       } else {
-        cerr << "line: " << this->getCurrentLine() << " - " << "  A-Instruction must be composed of only with digit and/or letter";
+        cerr << "line: " << this->getCurrentLine() << " - " << "  A-Instruction must be composed of only digit and/or letter";
       }
     } else {
       cerr << "line: " << this->getCurrentLine() << " - " << "  A-Instruction must be composed of a single word";
     }
-  }
-
-  if(current_line[0] == '('){
+  } else if (current_line[0] == '(') {
     vector<string> tokens = tokenize(current_line);
 
-    if(tokens[0].back() == ')'){
-      if(isCorrectlyFormatted(tokens[0].substr(1,tokens[0].size()-2))){
+    if (tokens[0].back() == ')') {
+      if (isCorrectlyFormatted(tokens[0].substr(1, tokens[0].size() - 2))) {
         instruction = L_INSTRUCTION;
-        if(tokens.size() >= 2 && tokens[1].size()>= 2 && !(tokens[1][0] == '/' && tokens[1][1] == '/')){
+        if (tokens.size() >= 2 && tokens[1].size() >= 2 && !(tokens[1][0] == '/' && tokens[1][1] == '/')) {
           cerr << "line: " << this->getCurrentLine() << " - " << " To many words on the same line";
         }
-      }else{
-        cerr << "line: " << this->getCurrentLine() << " - " << "  L-Instruction must be composed of only with digit and/or letter";
+      } else {
+        cerr << "line: " << this->getCurrentLine() << " - " << "  L-Instruction must be composed of only digit and/or letter";
       }
-    }else{
+    } else {
       cerr << "line: " << this->getCurrentLine() << " - " << " ')' is missing";
     }
+  }else{
+    instruction = C_INSTRUCTION;
   }
+
+  this->currentInstruction = instruction;
 
 }
