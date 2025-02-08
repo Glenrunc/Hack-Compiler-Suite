@@ -12,11 +12,11 @@ class Parser {
   ifstream File;
   int line_number;
   string current_line;
-  bool isFileOpen;
-  InstructionType currentInstruction;
+  bool is_file_open;
+  InstructionType current_instruction;
 
   public:
-  Parser() : line_number(0), current_line(string("\0")), isFileOpen(false), currentInstruction(NOT_DEFINE) {};
+  Parser() : line_number(0), current_line(string("\0")), is_file_open(false), current_instruction(NOT_DEFINE) {};
   Parser(const char* input_path);
   virtual ~Parser() {};
 
@@ -28,5 +28,4 @@ class Parser {
   InstructionType getCurrentInstruction() const;
   bool isOpen() const;
 };
-
 #endif

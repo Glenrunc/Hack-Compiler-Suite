@@ -1,10 +1,10 @@
 #include "parser.hpp"
 
-Parser::Parser(const char* input_path) : File(input_path), line_number(0), current_line(string("\0")), currentInstruction(NOT_DEFINE) {
+Parser::Parser(const char* input_path) : File(input_path), line_number(0), current_line(string("\0")), current_instruction(NOT_DEFINE) {
   if (!File) {
     cerr << "Error when trying to open this file" << endl;
   } else {
-    this->isFileOpen = true;
+    this->is_file_open = true;
   }
 }
 
@@ -18,7 +18,7 @@ void Parser::readNextLine() {
       cerr << "Error when trying to read line" << endl;
     }
     this->File.close();
-    this->isFileOpen = false;
+    this->is_file_open = false;
   }
 }
 
@@ -31,11 +31,11 @@ string Parser::getCurrentLine() const {
 }
 
 bool Parser::isOpen() const {
-  return this->isFileOpen;
+  return this->is_file_open;
 }
 
 InstructionType Parser::getCurrentInstruction() const {
-  return this->currentInstruction;
+  return this->current_instruction;
 }
 
 void Parser::findInstruction() {
@@ -79,6 +79,6 @@ void Parser::findInstruction() {
     instruction = C_INSTRUCTION;
   }
 
-  this->currentInstruction = instruction;
+  this->current_instruction = instruction;
 
 }
