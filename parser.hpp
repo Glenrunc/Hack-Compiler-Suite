@@ -9,7 +9,7 @@ enum InstructionType {
 
 class Parser {
   private:
-  ifstream File;
+  ifstream input_file;
   int line_number;
   string current_line;
   bool is_file_open;

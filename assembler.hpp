@@ -7,15 +7,17 @@
 class Assembler{
     private:
     Parser parser;
-    string input_path;
-    string output_path;
+    const char* input_path;
+    const char* output_path;
     ofstream output_file;
+    bool is_output_file_open;
 
     public:
-    Assembler(): parser(Parser()),input_path(string('\0')),output_path(string('\0')){};
-    Assembler(string input_path, string output_path);
-    virtual ~Assembler();
+    Assembler():input_path("\0"),output_path("\0"), is_output_file_open(false){};
+    Assembler(const char* input_path, const char* output_path);
+    virtual ~Assembler(){};
 
+    void runAssembler();
 
 };
 #endif
