@@ -1,6 +1,8 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
+#include <algorithm>
+#include <bitset>
 #include <cctype>
 #include <fstream>
 #include <iostream>
@@ -9,7 +11,6 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
-#include <bitset>
 
 using namespace std;
 
@@ -28,7 +29,7 @@ bool isCorrectlyFormatted(string symbol);
 
 void addAIntruction(string A_instruction);
 void addLIntstruction(string L_instruction, int line_number);
-string  parseCInstruction(string instruction);
+string parseCInstruction(string instruction);
 string parseAInstruction(string instruction);
 
 bool isInLabelTable(string label_name);
