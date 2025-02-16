@@ -11,22 +11,22 @@ D=A
 @addr
 M=D
 (LOOP)
-// RAM[addr] = -1
-@addr
-A=M
-M=-1
-// addr = base address of next screen row
-@addr
-D=M
-@32
-D=D+A
-@addr
-M=D
-// decrements n and loops
-@n
-MD=M-1
-@LOOP
-D;JGT
+    // RAM[addr] = -1
+    @addr
+    A=M
+    M=-1
+    // addr = base address of next screen row
+    @addr
+    D=M
+    @32
+    D=D+A
+    @addr
+    M=D
+    // decrements n and loops
+    @n
+    MD=M-1
+    @LOOP
+    D;JGT
 (END)
-@END
-0;JMP
+    @END
+    0;JMP

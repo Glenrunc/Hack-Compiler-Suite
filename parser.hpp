@@ -16,7 +16,7 @@ class Parser {
   InstructionType current_instruction;
 
   public:
-  Parser() : line_number(0), current_line(string("\0")), is_file_open(false), current_instruction(NOT_DEFINE) {};
+  Parser() : line_number(0), current_line(string("")), is_file_open(false), current_instruction(NOT_DEFINE) {};
   Parser(const char* input_path);
   virtual ~Parser() {};
 
