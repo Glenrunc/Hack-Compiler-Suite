@@ -1,10 +1,10 @@
 #include "parser.hpp"
 
 Parser::Parser(const char* input_path)
-  : input_file(input_path),
-  line_number(0),
-  current_line(string("")),
-  current_instruction(NOT_DEFINE) {
+    : input_file(input_path),
+      line_number(0),
+      current_line(string("")),
+      current_instruction(NOT_DEFINE) {
   if (!input_file) {
     cerr << "Error when trying to open this file" << endl;
   } else {
@@ -13,12 +13,14 @@ Parser::Parser(const char* input_path)
 }
 
 void Parser::readNextLine() {
-  while (getline(this->input_file, this->current_line) && this->current_line.empty()) {
+  while (getline(this->input_file, this->current_line) &&
+         this->current_line.empty()) {
   }
 
   if (!this->current_line.empty()) {
     findInstruction();
-    if (this->current_instruction != COMMENT_LINE) {
+    if (this->current_instruction != COMMENT_LINE &&
+        this->current_instruction != L_INSTRUCTION) {
       line_number++;
     }
   }
@@ -29,17 +31,11 @@ void Parser::readNextLine() {
   }
 }
 
-int Parser::getCurrentLineNumber() const {
-  return this->line_number;
-}
+int Parser::getCurrentLineNumber() const { return this->line_number; }
 
-string Parser::getCurrentLine() const {
-  return this->current_line;
-}
+string Parser::getCurrentLine() const { return this->current_line; }
 
-bool Parser::isOpen() const {
-  return this->is_file_open;
-}
+bool Parser::isOpen() const { return this->is_file_open; }
 
 InstructionType Parser::getCurrentInstruction() const {
   return this->current_instruction;
@@ -56,7 +52,7 @@ void Parser::findInstruction() {
     }
 
     if (current_line.size() >= 2 && current_line[0] == '/' &&
-      current_line[1] == '/') {
+        current_line[1] == '/') {
       instruction = COMMENT_LINE;
     } else if (current_line[0] == '@') {
       vector<string> tokens = tokenize(current_line);
@@ -65,12 +61,13 @@ void Parser::findInstruction() {
         if (isCorrectlyFormatted(current_line.substr(1))) {
           instruction = A_INSTRUCTION;
         } else {
-          cerr << "line: " << this->getCurrentLine() << " - "
-            << "  A-Instruction must be composed of only digit and/or letter";
+          cerr
+              << "line: " << this->getCurrentLine() << " - "
+              << "  A-Instruction must be composed of only digit and/or letter";
         }
       } else {
         cerr << "line: " << this->getCurrentLine() << " - "
-          << "  A-Instruction must be composed of a single word";
+             << "  A-Instruction must be composed of a single word";
       }
     } else if (current_line[0] == '(') {
       vector<string> tokens = tokenize(current_line);
@@ -79,23 +76,23 @@ void Parser::findInstruction() {
         if (isCorrectlyFormatted(tokens[0].substr(1, tokens[0].size() - 2))) {
           instruction = L_INSTRUCTION;
           if (tokens.size() >= 2 && tokens[1].size() >= 2 &&
-            !(tokens[1][0] == '/' && tokens[1][1] == '/')) {
+              !(tokens[1][0] == '/' && tokens[1][1] == '/')) {
             cerr << "line: " << this->getCurrentLine() << " - "
-              << " To many words on the same line";
+                 << " To many words on the same line";
           }
         } else {
-          cerr << "line: " << this->getCurrentLine() << " - "
-            << "  L-Instruction must be composed of only digit and/or letter";
+          cerr
+              << "line: " << this->getCurrentLine() << " - "
+              << "  L-Instruction must be composed of only digit and/or letter";
         }
       } else {
-        cerr << "line: " << this->getCurrentLine() << " ->" << " ')' is missing" << endl;
+        cerr << "line: " << this->getCurrentLine() << " ->" << " ')' is missing"
+             << endl;
       }
     } else {
       instruction = C_INSTRUCTION;
     }
   }
 
-
   this->current_instruction = instruction;
 }
-

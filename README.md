@@ -1,6 +1,6 @@
 # Assembler for Hack Architecture
 
-The Hack computer is described in Chapter 5 of the [Nand2Tetris book](https://github.com/jherskow/nand2tetris/blob/master/nand2tetris%20BOOK.pdf). This C++ assembler is not optimized. Feel free to clone the repo and submit a PR.
+The Hack computer is described in Chapter 5 of the [Nand2Tetris book](https://github.com/jherskow/nand2tetris/blob/master/nand2tetris%20BOOK.pdf). This assembler is not optimized. Feel free to clone the repo and submit a PR.
 
 ## Overview
 

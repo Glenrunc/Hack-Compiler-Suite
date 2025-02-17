@@ -29,7 +29,7 @@ unordered_map<string, string> jumpTable = {
     {"", "000"},    {"JGT", "001"}, {"JEQ", "010"}, {"JGE", "011"},
     {"JLT", "100"}, {"JNE", "101"}, {"JLE", "110"}, {"JMP", "111"}};
 
-int last_ram_enter = 0;
+int last_ram_entry = 0;
 
 bool isValidComp(string &comp) {
   set<string> validComp = {"0",   "1",   "-1",  "D",   "A",   "!D",  "!A",
@@ -80,15 +80,20 @@ void addAIntruction(string A_instruction) {
 
   bool isNumber = all_of(symbol.begin(), symbol.end(), ::isdigit);
 
-  if (!isNumber && !isInLabelTable(symbol)) {
-    last_ram_enter = (last_ram_enter == 0) ? 16 : last_ram_enter + 1;
-    labelTable[symbol] = last_ram_enter;
+  if (!isNumber && !isInLabelTable(symbol) &&
+      std::any_of(symbol.begin(), symbol.end(), ::islower)) {
+    last_ram_entry = (last_ram_entry == 0) ? 16 : last_ram_entry + 1;
+    labelTable[symbol] = last_ram_entry;
   }
 }
 
 void addLIntstruction(string L_instruction, int line_number) {
   string instruction = L_instruction.substr(1, L_instruction.size() - 2);
-  labelTable[instruction] = line_number;
+  if (std::any_of(instruction.begin(), instruction.end(), ::islower)) {
+    cerr << "L-instruction must be in upper case" << endl;
+  } else {
+    labelTable[instruction] = line_number;
+  }
 }
 
 string parseCInstruction(string instruction) {

@@ -14,7 +14,7 @@
 
 using namespace std;
 
-extern int last_ram_enter;
+extern int last_ram_entry;
 extern unordered_map<string, int> LabelTable;
 extern unordered_map<string, string> compTable;
 extern unordered_map<string, string> destTable;
