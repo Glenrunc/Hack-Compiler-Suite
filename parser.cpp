@@ -1,9 +1,7 @@
 #include "parser.hpp"
 
-Parser::Parser(const char* input_path)
-    : input_file(input_path),
-      line_number(0),
-      current_line(string("")),
+Parser::Parser(const char *input_path)
+    : input_file(input_path), line_number(0), current_line(string("")),
       current_instruction(NOT_DEFINE) {
   if (!input_file) {
     cerr << "Error when trying to open this file" << endl;

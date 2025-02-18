@@ -1,10 +1,7 @@
 #include "assembler.hpp"
 
-Assembler::Assembler(const char* input_path, const char* output_path)
-    : parser(input_path),
-      input_path(input_path),
-      output_path(output_path),
-      output_file(output_path) {
+Assembler::Assembler(const char *input_path, const char *output_path)
+    : parser(input_path), input_path(input_path), output_path(output_path),output_file(output_path) {
   if (!output_file) {
     cerr << "error when trying to open output file" << endl;
   } else {
