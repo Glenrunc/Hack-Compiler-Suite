@@ -1,8 +1,7 @@
 #include "parser.hpp"
 
-Parser::Parser(const char *input_path)
-    : input_file(input_path), line_number(0), current_line(string("")),
-      current_instruction(NOT_DEFINE) {
+BaseParser::BaseParser(const char *input_path)
+    : input_file(input_path), line_number(0), current_line(string("")) {
   if (!input_file) {
     cerr << "Error when trying to open this file" << endl;
   } else {
@@ -10,7 +9,7 @@ Parser::Parser(const char *input_path)
   }
 }
 
-void Parser::readNextLine() {
+void ASMParser::readNextLine()  {
   while (getline(this->input_file, this->current_line) &&
          this->current_line.empty()) {
   }
@@ -29,18 +28,9 @@ void Parser::readNextLine() {
   }
 }
 
-int Parser::getCurrentLineNumber() const { return this->line_number; }
 
-string Parser::getCurrentLine() const { return this->current_line; }
-
-bool Parser::isOpen() const { return this->is_file_open; }
-
-InstructionType Parser::getCurrentInstruction() const {
-  return this->current_instruction;
-}
-
-void Parser::findInstruction() {
-  InstructionType instruction = NOT_DEFINE;
+void ASMParser::findInstruction() {
+  instructionType instruction = NOT_DEFINE;
 
   string current_line = this->getCurrentLine();
 
@@ -93,4 +83,13 @@ void Parser::findInstruction() {
   }
 
   this->current_instruction = instruction;
+}
+
+
+void VMParser::readNextLine(){
+  /*TODO*/
+}
+
+void VMParser::findInstruction(){
+  /*TODO*/
 }

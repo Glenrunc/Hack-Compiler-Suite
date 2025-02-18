@@ -1,7 +1,8 @@
 #include "assembler.hpp"
 
 Assembler::Assembler(const char *input_path, const char *output_path)
-    : parser(input_path), input_path(input_path), output_path(output_path),output_file(output_path) {
+    : parser(input_path), input_path(input_path), output_path(output_path),
+      output_file(output_path) {
   if (!output_file) {
     cerr << "error when trying to open output file" << endl;
   } else {
@@ -10,7 +11,7 @@ Assembler::Assembler(const char *input_path, const char *output_path)
 }
 
 void Assembler::runAssembler() {
-  Parser temp_parser = Parser(this->input_path);
+  ASMParser temp_parser = ASMParser(this->input_path);
 
   // First passage
   while (this->parser.isOpen()) {

@@ -1,8 +1,8 @@
-# Assembler for Hack Architecture
+# Assembler, VM for Hack Architecture
 
 The Hack computer is described in Chapter 5 of the [Nand2Tetris book](https://github.com/jherskow/nand2tetris/blob/master/nand2tetris%20BOOK.pdf). This assembler is not optimized. Feel free to clone the repo and submit a PR.
 
-## Overview
+## Overview assembler
 
 > The Hack computer consists of a **ROM32K** for storing instructions, a **CPU**, and **RAM** for data storage. The RAM also includes memory-mapped I/O devices, such as a **screen** and **keyboard**.
 
@@ -82,3 +82,5 @@ M=D
 ```
 
 This program reads a value from `R0`, checks if it is non-positive, and jumps to `(END)` if necessary. Otherwise, it initializes `n = R0` and performs operations related to screen memory, decrementing `n` in a loop.
+
+## Overview VM translator

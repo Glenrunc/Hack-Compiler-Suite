@@ -5,14 +5,13 @@
 
 class Assembler {
 private:
-  Parser parser;
+  ASMParser parser;
   const char *input_path;
   const char *output_path;
   ofstream output_file;
   bool is_output_file_open;
 
 public:
-  Assembler(): input_path("\0"), output_path("\0"), is_output_file_open(false){};
   Assembler(const char *input_path, const char *output_path);
   virtual ~Assembler(){};
 
