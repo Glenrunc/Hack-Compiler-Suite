@@ -29,6 +29,13 @@ unordered_map<string, string> jumpTable = {
     {"", "000"},    {"JGT", "001"}, {"JEQ", "010"}, {"JGE", "011"},
     {"JLT", "100"}, {"JNE", "101"}, {"JLE", "110"}, {"JMP", "111"}};
 
+unordered_map<string, commandType> commandTable = {
+    {"function", C_FUNCTION}, {"push", C_PUSH},      {"pop", C_POP},
+    {"label", C_LABEL},       {"Eq", C_ARITHMETIC},  {"if-goto", C_IF},
+    {"Add", C_ARITHMETIC},    {"Sub", C_ARITHMETIC}, {"goto", C_GOTO},
+    {"return", C_RETURN},     {"Neg", C_ARITHMETIC}, {"Gt", C_ARITHMETIC},
+    {"Lt", C_ARITHMETIC},     {"Or", C_ARITHMETIC},  {"Not", C_ARITHMETIC}};
+
 int last_ram_entry = 0;
 
 bool isValidComp(string &comp) {
@@ -47,6 +54,12 @@ bool isValidDest(string &dest) {
 bool isValidJump(string &jump) {
   set<string> validJump = {"JGT", "JEQ", "JGE", "JLT", "JNE", "JLE", "JMP"};
   return jump.empty() || validJump.find(jump) != validJump.end();
+}
+
+bool isValidSegment(string &segment) {
+  set<string> validSegment = {"argument", "local", "static",  "constant",
+                              "this",     "that",  "pointer", "temp"};
+  return validSegment.find(segment) != validSegment.end();
 }
 
 vector<string> tokenize(const string &s) {
