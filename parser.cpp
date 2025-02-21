@@ -150,7 +150,6 @@ void VMParser::findInstruction() {
          << endl;
     return;
   }
-
 }
 
 void VMParser::findArg1and2(vector<string> line_parsed) {
@@ -165,12 +164,12 @@ void VMParser::findArg1and2(vector<string> line_parsed) {
     return;
   }
 
-  if (line_parsed.size() < 2 && this->current_command!=C_RETURN) {
+  if (line_parsed.size() < 2 && this->current_command != C_RETURN) {
     cerr << "Error: not enough arguments for command " << this->current_command
          << endl;
     return;
   }
-  if(this->current_command == C_RETURN){
+  if (this->current_command == C_RETURN) {
     this->arg1 = "";
     this->arg2 = 0;
   }

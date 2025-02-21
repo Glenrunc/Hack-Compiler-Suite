@@ -1,8 +1,6 @@
-#include "assembler.hpp"
+#include "translator.hpp"
 
-Assembler::Assembler(const char *input_path, const char *output_path)
-    : parser(input_path), input_path(input_path), output_path(output_path),
-      output_file(output_path) {
+Translator::Translator(const char *output_path, const char* input_path):output_file(output_path), input_path(input_path) {
   if (!output_file) {
     cerr << "error when trying to open output file" << endl;
   } else {
@@ -10,7 +8,7 @@ Assembler::Assembler(const char *input_path, const char *output_path)
   }
 }
 
-void Assembler::runAssembler() {
+void Assembler::runTranslator() {
   ASMParser temp_parser = ASMParser(this->input_path);
 
   // First passage
